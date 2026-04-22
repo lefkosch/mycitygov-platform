@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base :: layout(~{::title}, ~{::section})}">
+
+<head>
+    <title>MyCityGov – Αρχική</title>
+</head>
+
+<body>
+<section class="mc-hero">
+
+    <!-- Αριστερό μπλε panel -->
+    <div class="mc-hero-left">
+        <div class="mc-badge">
+            <span class="mc-badge-circle">GR</span>
+            <span>Ηλεκτρονικές Υπηρεσίες Δήμου</span>
+        </div>
+
+        <h1>Καλωσόρισες στο MyCityGov</h1>
+
+        <p class="mc-hero-text">
+            Υπέβαλε αιτήματα, κλείσε ραντεβού και παρακολούθησε την πορεία των υποθέσεών σου,
+            εύκολα και γρήγορα, από τον υπολογιστή ή το κινητό σου.
+        </p>
+
+        <ul class="mc-hero-list">
+            <li>24/7 πρόσβαση στις υπηρεσίες του Δήμου</li>
+            <li>Ασφαλής είσοδος με τα στοιχεία σου</li>
+            <li>Ιστορικό αιτημάτων και ραντεβού πολιτών</li>
+        </ul>
+
+        <div class="mc-hero-footer">
+            <span class="mc-hero-logo">MC MyCityGov • Δήμος</span>
+        </div>
+    </div>
+
+    <!-- Δεξιά κάρτα σύνδεσης -->
+    <div class="mc-auth-card">
+        <div class="mc-auth-header">
+            <span class="mc-auth-label">ΕΝΑΡΞΗ</span>
+            <h2>Σύνδεση</h2>
+            <p class="mc-auth-subtitle">
+                Δεν έχεις λογαριασμό;
+                <a th:href="@{/register}">Εγγραφή</a>
+            </p>
+        </div>
+
+        <!-- Μηνύματα από Spring Security -->
+        <p th:if="${param.error}" class="mc-alert mc-alert-error">
+            Λάθος email ή κωδικός.
+        </p>
+        <div th:if="${param.logout}" class="mc-alert mc-alert-info">
+            Έχετε αποσυνδεθεί.
+        </div>
+        <p th:if="${param.registered}" class="mc-alert mc-alert-success">
+            Η εγγραφή ολοκληρώθηκε. Συνδεθείτε.
+        </p>
+
+        <!-- Login με κωδικούς -->
+        <form th:action="@{/login}" method="post" class="mc-form">
+            <div class="mc-form-group">
+                <label for="username">Email</label>
+                <input id="username" name="username" type="email"
+                       placeholder="name@example.com" required/>
+            </div>
+
+            <div class="mc-form-group">
+                <label for="password">Κωδικός πρόσβασης</label>
+
+                <!-- ✅ ΕΔΩ μπαίνει το "ματάκι" -->
+                <div class="mc-password-wrap">
+                    <input id="password"
+                           name="password"
+                           type="password"
+                           required
+                           autocomplete="current-password"/>
+
+                    <button type="button"
+                            class="mc-password-toggle"
+                            aria-label="Εμφάνιση κωδικού"
+                            aria-pressed="false">
+                        <!-- Eye (show) -->
+                        <svg class="icon-eye" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+
+                        <!-- Eye off (hide) -->
+                        <svg class="icon-eye-off" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 3l18 18"/>
+                            <path d="M10.58 10.58A2 2 0 0 0 12 14a2 2 0 0 0 1.42-.58"/>
+                            <path d="M9.88 5.09A10.94 10.94 0 0 1 12 5c6.5 0 10 7 10 7a19.52 19.52 0 0 1-3.25 4.43"/>
+                            <path d="M6.61 6.61A19.56 19.56 0 0 0 2 12s3.5 7 10 7a10.94 10.94 0 0 0 4.12-.81"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="mc-form-footer">
+                <label class="mc-checkbox">
+                    <input type="checkbox" name="remember-me"/>
+                    <span>Να με θυμάσαι</span>
+                </label>
+                <a href="#" class="mc-link-muted">Ξέχασα τον κωδικό</a>
+            </div>
+
+            <button type="submit" class="mc-button-primary mc-button-full">
+                Είσοδος στο MyCityGov
+            </button>
+        </form>
+
+        <!-- Divider -->
+        <div style="margin: 14px 0; text-align:center;">
+            <span style="opacity:.7;">ή</span>
+        </div>
+
+        <!-- MockGov login -->
+        <a th:if="${mockGovUiUrl != null}"
+           th:href="${mockGovUiUrl}"
+           class="mc-button-primary mc-button-full"
+           style="text-decoration:none; display:block; text-align:center;">
+            Σύνδεση με MockGov (Token)
+        </a>
+
+        <a th:unless="${mockGovUiUrl != null}"
+           th:href="@{/gov/login}"
+           class="mc-button-primary mc-button-full"
+           style="text-decoration:none; display:block; text-align:center;">
+            Σύνδεση με MockGov (Token)
+        </a>
+
+        <p class="mc-form-terms">
+            Με την είσοδο αποδέχεσαι τους όρους χρήσης της πλατφόρμας.
+        </p>
+    </div>
+
+</section>
+</body>
+</html>

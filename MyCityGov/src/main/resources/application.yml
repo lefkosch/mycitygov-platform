@@ -1,0 +1,72 @@
+spring:
+  datasource:
+    url: jdbc:h2:file:./LOCAL_DATA/H2/mycitygov2db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+# Swagger / OpenAPI (springdoc)
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    tagsSorter: alpha
+    operationsSorter: alpha
+
+server:
+  port: 8080
+  error:
+    whitelabel:
+      enabled: false
+    include-message: always
+    include-binding-errors: always
+    include-exception: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.springframework.security: DEBUG
+
+routee:
+  app-id: 5bba56ece4b0a43fbf239aae
+  app-secret: kDsvtwHe3w
+  sender: HUANOC
+
+mycitygov:
+  mockgov:
+    api-base-url: "http://localhost:8091"
+    public-base-url: "http://localhost:8091"
+    client-token: "mycitygov-client-token"
+
+  noc:
+    base-url: "http://localhost:8081"
+    sms:
+      active: true
+      fail-fast: false
+
+  storage:
+    s3:
+      endpoint: "http://localhost:9000"
+      access-key: "minioadmin"
+      secret-key: "minioadmin"
+      bucket: "mycitygov"
+      region: "us-east-1"
+
+# JWT Config (για το JwtConfig @ConfigurationProperties(prefix="security.jwt"))
+security:
+  jwt:
+    # ΠΡΕΠΕΙ να είναι >= 32 χαρακτήρες για HS256
+    secret: "CHANGE_ME_32CHARS_MINIMUM_CHANGE_ME_32CHARS"
+    issuer: "mycitygov"
+    audience: "mycitygov-clients"
+    ttlMinutes: 120
