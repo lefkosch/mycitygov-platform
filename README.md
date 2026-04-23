@@ -6,7 +6,7 @@ MyCityGov
 Clone the repository:
 
 ```shell
-git clone https://github.com/Spiroskess/MyCityGov.git
+git clone https://github.com/lefkosch/mycitygov-platform.git
 ```
 
 ---
@@ -14,7 +14,7 @@ git clone https://github.com/Spiroskess/MyCityGov.git
 Run the example:
 
 ```shell
-cd MyCityGov
+cd mycitygov-platform
 docker compose up -d --build # Windows / MacOS / Linux
 ```
 After the build you open/close the program with the following commands
