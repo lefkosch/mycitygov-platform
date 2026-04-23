@@ -1,6 +1,30 @@
 MyCityGov
 ===
+A web-based citizen services platform inspired by gov.gr, developed as a team project at Harokopio University of Athens.
 
+## Overview
+MyCityGov is a full-stack application that allows citizens to submit requests, report issues, and manage appointments with municipal services through a centralized platform.
+
+## Technologies
+- Java (Spring Boot)
+- H2 Database
+- Docker Compose
+- Swagger / OpenAPI
+- JWT Authentication
+- MinIO (S3 Storage)
+
+## Features
+- Citizen request submission
+- Issue reporting
+- Appointment management
+- Role-based access control (Citizen, Employee, Admin)
+
+## My Contribution
+- Implemented and managed data persistence using H2 database
+- Developed and integrated the MockGovService for user validation
+- Contributed to backend development using Spring Boot
+
+## How to Run
 ---
 
 Clone the repository:
