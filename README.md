@@ -1,4 +1,4 @@
-#MyCityGov
+MyCityGov
 ===
 A web-based citizen services platform inspired by gov.gr, developed as a team project at Harokopio University of Athens.
 
